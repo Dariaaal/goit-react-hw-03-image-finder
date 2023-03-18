@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import getImages from './api';
 import ImageGalleryItem from "./ImageGalleryItem";
+import css from './ImageGallery.module.css';
 
 export default class ImageGallery extends Component {
   state = {
@@ -16,7 +17,7 @@ export default class ImageGallery extends Component {
   render() {
     const {items} = this.state;
     return (
-        <ul>
+        <ul className={css.ImageGallery}>
             {items && items.map((item)=>(
                 <ImageGalleryItem
                 key={item.id}
