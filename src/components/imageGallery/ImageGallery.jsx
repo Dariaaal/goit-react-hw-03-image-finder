@@ -3,12 +3,14 @@ import getImages from '../api';
 import ImageGalleryItem from "../imageItem/ImageGalleryItem";
 import css from './ImageGallery.module.css';
 import {Loader} from '../loader/Loader';
+import {Button} from '../button/Button'
 
 export default class ImageGallery extends Component {
   state = {
     items: null,
     isLoading: false,
     error: false,
+    page: 1
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -27,6 +29,12 @@ export default class ImageGallery extends Component {
     }
   }
   }
+  
+  onLoadMore = () => {
+    this.setState((prevState)=>({
+      page: prevState.page + 1
+    }))
+  }
 
   render() {
     const {items, isLoading, error} = this.state;
@@ -44,6 +52,7 @@ export default class ImageGallery extends Component {
                 />
             ))}
         </ul>}
+        <Button onClick={this.onLoadMore}/>
       </div>
     )
   }
