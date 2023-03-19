@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import getImages from './api';
-import ImageGalleryItem from "./ImageGalleryItem";
+import getImages from '../api';
+import ImageGalleryItem from "../imageItem/ImageGalleryItem";
 import css from './ImageGallery.module.css';
-import {Loader} from './Loader';
+import {Loader} from '../loader/Loader';
 
 export default class ImageGallery extends Component {
   state = {
