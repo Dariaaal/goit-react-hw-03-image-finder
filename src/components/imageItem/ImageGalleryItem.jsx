@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import css from './ImageGalleryItem.module.css';
 import PropTypes from 'prop-types';
-import { Modal } from 'components/modal/Modal';
+import Modal from 'components/modal/Modal';
 
 export default class ImageGalleryItem extends Component {
   state = {
@@ -20,7 +20,7 @@ export default class ImageGalleryItem extends Component {
   const {id, webformatURL, largeImageURL, tags} = this.props;
   return <li key={id} className={css.ImageGalleryItem}>
     <button type='button' onClick={this.openModal}><img src={webformatURL} alt={tags} className={css.image}/></button>
-    {this.state.showModal && <Modal largeImageURL={largeImageURL} tags={tags} />}
+    {this.state.showModal && <Modal onClose={this.closeModal}><img src={largeImageURL} alt={tags} /></Modal>}
   </li>
   }
 }

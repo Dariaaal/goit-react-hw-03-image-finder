@@ -1,9 +1,21 @@
+import React, { Component } from "react";
 import css from './Modal.module.css'
 
-export const Modal = ({largeImageURL, tags}) => {
+export default class Modal extends Component {
+
+  componentDidMount() {
+    window.addEventListener('keydown', e => {
+      if (e.code === 'Escape') {
+        this.props.onClose();
+      }
+    });
+  }
+
+  render() {
     return <div className={css.overlay}>
     <div className={css.modal}>
-      {<img src={largeImageURL} alt={tags} />}
+      {this.props.children}
     </div>
-  </div>
-}
+    </div>
+  }
+  }
