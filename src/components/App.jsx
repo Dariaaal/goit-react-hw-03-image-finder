@@ -12,7 +12,7 @@ export default class App extends Component {
     items: null,
     isLoading: false,
     error: false,
-    page: 1
+    page: 1,
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -54,7 +54,7 @@ export default class App extends Component {
     >
     {error && (<p>Nothing was found</p>)}
     <Searchbar handleSearch={this.handleSearch}/>
-    {isLoading ? <Loader/> : <ImageGallery items={this.state.items}/>}
+    {isLoading ? <Loader/> : <ImageGallery items={items}/>}
     {items!==null && <Button onClick={this.onLoadMore}/>}
     </div>
   );
