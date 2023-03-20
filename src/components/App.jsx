@@ -15,11 +15,12 @@ export default class App extends Component {
     page: 1,
   }
 
-  async componentDidUpdate(prevProps, prevState) {
-      if (prevState.searchText !== this.state.searchText) {
+  async componentDidUpdate(_, prevState) {
+      if (prevState.searchText !== this.state.searchText ||
+        this.state.page !== prevState.page) {
     try {
       this.setState({isLoading: true});
-      const items = await getImages(this.state.searchText)
+      const items = await getImages(this.state.searchText, this.state.page)
       this.setState({items: items.hits, isLoading: false})
       }
     catch (error) {
@@ -40,6 +41,7 @@ export default class App extends Component {
     this.setState((prevState)=>({
       page: prevState.page + 1
     }))
+    
   }
  
   render() {
