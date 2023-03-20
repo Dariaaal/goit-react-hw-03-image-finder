@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ImageGalleryItem = ({id, webformatURL, largeImageURL, tags}) => {
     return <li key={id} className={css.ImageGalleryItem}>
-    <a href={largeImageURL}><img src={webformatURL} alt={tags} className={css.image}/></a>
+    <button type='button' onClick={()=>largeImageURL}><img src={webformatURL} alt={tags} className={css.image}/></button>
   </li>
 }
 
