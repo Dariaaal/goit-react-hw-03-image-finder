@@ -9,7 +9,7 @@ export default class App extends Component {
 
   state = {
     searchText: '',
-    items: null,
+    items: [],
     isLoading: false,
     error: false,
     page: 1,
@@ -21,7 +21,10 @@ export default class App extends Component {
     try {
       this.setState({isLoading: true});
       const items = await getImages(this.state.searchText, this.state.page)
-      this.setState({items: items.hits, isLoading: false})
+      this.setState(prevState => ({
+        items: [...prevState.items, ...items.hits],
+      }));
+      // this.setState({items: items.hits, isLoading: false})
       }
     catch (error) {
         this.setState({error: true, isLoading: false});
@@ -34,14 +37,13 @@ export default class App extends Component {
   }
 
   handleSearch = (searchText) => {
-    this.setState({searchText});
+    this.setState({searchText, items: [], isLoading: false, error: false, page: 1});
   }
 
   onLoadMore = () => {
     this.setState((prevState)=>({
       page: prevState.page + 1
-    }))
-    
+    }))  
   }
  
   render() {
@@ -57,7 +59,7 @@ export default class App extends Component {
     {error && (<p>Nothing was found</p>)}
     <Searchbar handleSearch={this.handleSearch}/>
     {isLoading ? <Loader/> : <ImageGallery items={items}/>}
-    {items && <Button onClick={this.onLoadMore}/>}
+    {items.length>=12 && <Button onClick={this.onLoadMore}/>}
     </div>
   );
   }
