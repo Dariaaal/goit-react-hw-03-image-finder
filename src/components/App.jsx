@@ -23,8 +23,8 @@ export default class App extends Component {
       this.setState({items: items.hits, isLoading: false})
       }
     catch (error) {
-      this.setState({error: true, isLoading: false});
-      console.log(error);
+        this.setState({error: true, isLoading: false});
+        console.log(error);
     }
     finally {
       this.setState({isLoading: false})
@@ -55,7 +55,7 @@ export default class App extends Component {
     {error && (<p>Nothing was found</p>)}
     <Searchbar handleSearch={this.handleSearch}/>
     {isLoading ? <Loader/> : <ImageGallery items={items}/>}
-    {items!==null && <Button onClick={this.onLoadMore}/>}
+    {items && <Button onClick={this.onLoadMore}/>}
     </div>
   );
   }
