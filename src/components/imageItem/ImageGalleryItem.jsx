@@ -25,18 +25,3 @@ export default class ImageGalleryItem extends Component {
   }
 }
 
-// const ImageGalleryItem = ({id, webformatURL, largeImageURL, tags}) => {
-//     return <li key={id} className={css.ImageGalleryItem}>
-//     <button type='button' onClick={()=>largeImageURL}><img src={webformatURL} alt={tags} className={css.image}/></button>
-//     <Modal/>
-//   </li>
-// }
-
-// ImageGalleryItem.propTypes = {
-//   id: PropTypes.number,
-//   webformatURL: PropTypes.string,
-//   largeImageURL: PropTypes.string,
-//   tags: PropTypes.string,
-// }
-
-// export default ImageGalleryItem;
