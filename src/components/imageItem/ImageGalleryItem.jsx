@@ -17,11 +17,11 @@ export default class ImageGalleryItem extends Component {
   }
 
   render(){
-  const {id, webformatURL, largeImageURL, tags} = this.props;
-  return <li key={id} className={css.ImageGalleryItem}>
-    <button type='button' onClick={this.openModal}><img src={webformatURL} alt={tags} className={css.image}/></button>
-    {this.state.showModal && <Modal onClose={this.closeModal}><img src={largeImageURL} alt={tags} /></Modal>}
-  </li>
+    const {id, webformatURL, largeImageURL, tags} = this.props;
+    return <li key={id} className={css.ImageGalleryItem}>
+      <img src={webformatURL} alt={tags} className={css.image} onClick={this.openModal}/>
+      {this.state.showModal && <Modal onClose={this.closeModal}><img src={largeImageURL} alt={tags} /></Modal>}
+    </li>
+    }
   }
-}
 
