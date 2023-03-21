@@ -4,7 +4,6 @@ import {ImageGallery} from "./imageGallery/ImageGallery";
 import getImages from './api';
 import {Loader} from './loader/Loader';
 import {Button} from './button/Button';
-// import Notiflix from 'notiflix';
 
 export default class App extends Component {
 
@@ -23,9 +22,8 @@ export default class App extends Component {
       this.setState({isLoading: true});
       const data = await getImages(this.state.searchText, this.state.page)
       this.setState(state => ({
-        items: [...state.items, ...data.hits],
+        items: [...state.items, ...data.hits], 
       }));
-      // this.setState({items: items.hits, isLoading: false})
     }
       catch (error) {
         this.setState({error: true, isLoading: false});
@@ -41,7 +39,7 @@ export default class App extends Component {
     this.setState({searchText, items: [], isLoading: false, error: false, page: 1});
   }
 
-  onLoadMore = (e) => {
+  onLoadMore = () => {
     this.setState((prevState)=>({
       page: prevState.page + 1
     }))  
@@ -59,7 +57,8 @@ export default class App extends Component {
     >
     <Searchbar handleSearch={this.handleSearch}/>
     {error && (<p>Nothing was found</p>)}
-    {isLoading ? <Loader/> : <ImageGallery items={items}/>}
+    {items && <ImageGallery items={items}/>}
+    {isLoading && <Loader/> }
     {(items.length>=12 && !isLoading) && <Button onClick={this.onLoadMore}/>}
     </div>
   );
