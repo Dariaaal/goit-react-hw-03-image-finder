@@ -13,6 +13,7 @@ export default class App extends Component {
     isLoading: false,
     error: false,
     page: 1,
+    totalhits: 500
   }
 
   async componentDidUpdate(_, prevState) {
@@ -21,6 +22,7 @@ export default class App extends Component {
     try {
       this.setState({isLoading: true});
       const data = await getImages(this.state.searchText, this.state.page)
+      console.log(data)
       this.setState(state => ({
         items: [...state.items, ...data.hits], 
       }));
@@ -46,7 +48,7 @@ export default class App extends Component {
   }
  
   render() {
-    const {items, isLoading, error} = this.state;
+    const {items, isLoading, error, totalhits} = this.state;
       return (
     <div
       style={{
@@ -59,7 +61,7 @@ export default class App extends Component {
     {error && (<p>Nothing was found</p>)}
     {items && <ImageGallery items={items}/>}
     {isLoading && <Loader/> }
-    {(items.length>=12 && !isLoading) && <Button onClick={this.onLoadMore}/>}
+    {(items.length >=12 && items.length < totalhits  && !isLoading) && <Button onClick={this.onLoadMore}/>}
     </div>
   );
   }
